@@ -4,7 +4,7 @@ export const setupDatabase = () => {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      console.log('Upgrading database...');
+
       if (!db.objectStoreNames.contains('products')) {
         const productStore = db.createObjectStore('products', {
           keyPath: 'id',
@@ -14,7 +14,7 @@ export const setupDatabase = () => {
         });
         productStore.createIndex('price', 'price', { unique: false });
 
-        // Adding static products
+        // Adicionar produtos estaticos
         productStore.transaction.oncomplete = () => {
           const productTransaction = db
             .transaction('products', 'readwrite')
